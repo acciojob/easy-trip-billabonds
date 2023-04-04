@@ -186,15 +186,11 @@ public class AirportRepository {
 
         int count = 0;
 
-        HashMap<Integer,List<Integer>> list = new HashMap<>();
-
-        for(Map.Entry<Integer,List<Integer>> map : flightToPassengerDb.entrySet())
+        for(List<Integer> list : flightToPassengerDb.values())
         {
-            List<Integer> passengers = map.getValue();
-
-            for(Integer st : passengers)
+            for(int i : list)
             {
-                if(st == passengerId)
+                if(i == passengerId)
                     count++;
             }
         }
@@ -244,7 +240,7 @@ public class AirportRepository {
 //        return 3000 + noOfPeopleWhoHaveAlreadyBooked*50;
 
         int noOfPeopleWhoHaveAlreadyBooked = flightToPassengerDb.get(flightId).size();
-        int variable_Fare = (noOfPeopleWhoHaveAlreadyBooked*(noOfPeopleWhoHaveAlreadyBooked+1)) * 25;
+        int variable_Fare = (noOfPeopleWhoHaveAlreadyBooked*(noOfPeopleWhoHaveAlreadyBooked-1)) * 25;
         int fixedPrice =  3000 * noOfPeopleWhoHaveAlreadyBooked;
 
         int totalFare  = fixedPrice + variable_Fare;
