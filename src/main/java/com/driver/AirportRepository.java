@@ -240,12 +240,14 @@ public class AirportRepository {
         //That is of all the passengers that have booked a flight till now and then calculate the revenue
         //Revenue will also decrease if some passenger cancels the flight
 
-        int noOfPeopleWhoHaveAlreadyBooked = flightToPassengerDb.get(flightId).size();
-        int variable_Fare = noOfPeopleWhoHaveAlreadyBooked * (noOfPeopleWhoHaveAlreadyBooked+1) * 25;
-        int fixedPrice =  3000 * noOfPeopleWhoHaveAlreadyBooked;
+//        int noOfPeopleWhoHaveAlreadyBooked = flightToPassengerDb.get(flightId).size();
+//        return 3000 + noOfPeopleWhoHaveAlreadyBooked*50;
 
-        int totalFare  = variable_Fare + fixedPrice;
-//        int totalFare  = fixedPrice;
+        int noOfPeopleWhoHaveAlreadyBooked = flightToPassengerDb.get(flightId).size();
+        int variable_Fare = noOfPeopleWhoHaveAlreadyBooked * 50;
+        int fixedPrice =  3000;
+
+        int totalFare  = fixedPrice + variable_Fare;
 
         return totalFare;
     }
