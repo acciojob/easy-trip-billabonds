@@ -35,26 +35,26 @@ public class AirportRepository {
         // Largest airport is in terms of terminals. 3 terminal airport is larger than 2 terminal airport
         // Incase of a tie return the Lexicographically smallest airportName
 
+        List<String> list = new ArrayList<>();
+        int max = Integer.MIN_VALUE;
 
-        String ans  = "";
-        int terminals = 0;
-
-        for(Airport airport : airportDb.values()){
-
-            if(terminals < airport.getNoOfTerminals())
-            {
-                ans = airport.getAirportName();
-                terminals = airport.getNoOfTerminals();
-            }
-
-            else if(airport.getNoOfTerminals() == terminals)
-            {
-                if(airport.getAirportName().compareTo(ans) < 0)
-                    ans = airport.getAirportName();;
-            }
+        for(Airport st : airportDb.values())
+        {
+            if (max < st.getNoOfTerminals())
+                max = st.getNoOfTerminals();
         }
 
-        return ans;
+        for(Airport st : airportDb.values())
+        {
+            if(st.getNoOfTerminals() == max)
+            {
+                list.add(st.getAirportName();;
+            }
+        }
+        if(list.size() > 0)
+            Collections.sort(list);
+
+        return list.get(0);
     }
 
                                                                                                 // 3rd API
@@ -63,18 +63,18 @@ public class AirportRepository {
         //Find the duration by finding the shortest flight that connects these 2 cities directly
         //If there is no direct flight between 2 cities return -1.
 
-        double distance = 1000000000;
+        double shorter_dis = Integer.MAX_VALUE;
 
-        for(Flight flight : flightDb.values()){
+        for(Flight st : flightDb.values()){
 
-            if(flight.getFromCity().equals(fromCity) && flight.getToCity().equals(fromCity))
-                distance = Math.min(distance , flight.getDuration());
+            if(st.getFromCity().equals(fromCity) && st.getToCity().equals(toCity))
+                shorter_dis = Math.min(shorter_dis,st.getDuration());
         }
 
-        if(distance == 1000000000)
+        if(shorter_dis == Integer.MAX_VALUE)
             return -1;
 
-        return distance;
+        return shorter_dis;
     }
 
                                                                                                  // 4th API
