@@ -244,8 +244,8 @@ public class AirportRepository {
 //        return 3000 + noOfPeopleWhoHaveAlreadyBooked*50;
 
         int noOfPeopleWhoHaveAlreadyBooked = flightToPassengerDb.get(flightId).size();
-        int variable_Fare = noOfPeopleWhoHaveAlreadyBooked * 50;
-        int fixedPrice =  3000;
+        int variable_Fare = (noOfPeopleWhoHaveAlreadyBooked*(noOfPeopleWhoHaveAlreadyBooked+1)) * 25;
+        int fixedPrice =  3000 * noOfPeopleWhoHaveAlreadyBooked;
 
         int totalFare  = fixedPrice + variable_Fare;
 
