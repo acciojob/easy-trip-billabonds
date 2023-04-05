@@ -4,21 +4,14 @@ import com.driver.model.Airport;
 import com.driver.model.City;
 import com.driver.model.Flight;
 import com.driver.model.Passenger;
-import io.swagger.models.auth.In;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import javax.print.DocFlavor;
 import java.util.*;
 
 public class AirportRepository {
 
-    HashMap<String,Airport> airportDb = new HashMap<>();
-    HashMap<Integer,Flight> flightDb = new HashMap<>();
-
-    HashMap<Integer,Passenger> passengerDb = new HashMap<>();
-
+    HashMap<String,Airport> airportDb = new HashMap<>();                       // for Airport Name
+    HashMap<Integer,Flight> flightDb = new HashMap<>();                        // for flight number
+    HashMap<Integer,Passenger> passengerDb = new HashMap<>();                   // for passenger count number
     HashMap<Integer,List<Integer>> flightToPassengerDb= new HashMap<>();       // key : flight , Value : list of passenger
-
 
                                                                                                  // 1st API - Done
     public void addAirport(Airport airport){
@@ -28,7 +21,6 @@ public class AirportRepository {
         String key = airport.getAirportName();
         airportDb.put(key,airport);
     }
-
                                                                                                 // 2nd API
     public String getLargestAirportName(){
 
@@ -48,15 +40,14 @@ public class AirportRepository {
         {
             if(st.getNoOfTerminals() == max)
             {
-                list.add(st.getAirportName();;
+                list.add(st.getAirportName());
             }
         }
-        if(list.size() > 0)
+        if(list.size() > 1)
             Collections.sort(list);
 
         return list.get(0);
     }
-
                                                                                                 // 3rd API
     public double getShortestDurationOfPossibleBetweenTwoCities(City fromCity, City toCity){
 
@@ -76,7 +67,6 @@ public class AirportRepository {
 
         return shorter_dis;
     }
-
                                                                                                  // 4th API
     public int getNumberOfPeopleOn(Date date, String airportName){
 
@@ -105,7 +95,6 @@ public class AirportRepository {
 
         return  count;
     }
-
                                                                                                 // 5th API
     public int calculateFlightFare(Integer flightId){
 
@@ -117,8 +106,6 @@ public class AirportRepository {
         int noOfPeopleWhoHaveAlreadyBooked = flightToPassengerDb.get(flightId).size();
         return 3000 + noOfPeopleWhoHaveAlreadyBooked*50;
     }
-
-
                                                                                                 // 6th API
     public String bookATicket(Integer flightId,Integer passengerId){
 
@@ -154,7 +141,6 @@ public class AirportRepository {
         }
         return "FAILURE";
     }
-
                                                                                                 // 7th API
     public String cancelATicket(Integer flightId,Integer passengerId){
 
@@ -177,8 +163,6 @@ public class AirportRepository {
 
         return "FAILURE";
     }
-
-
                                                                                                 // 8th API
     public int countOfBookingsDoneByPassengerAllCombined(Integer passengerId){
 
@@ -197,7 +181,6 @@ public class AirportRepository {
 
         return count;
     }
-
                                                                                                 // 9th API
     public String addFlight(Flight flight){
 
@@ -206,8 +189,6 @@ public class AirportRepository {
         flightDb.put(key,flight);
         return "SUCCESS";
     }
-
-
                                                                                                 // 10th API
     public String getAirportNameFromFlightId(Integer flightId){
 
@@ -227,17 +208,12 @@ public class AirportRepository {
 
         return null;
     }
-
-
                                                                                                 // 11th API
     public int calculateRevenueOfAFlight(Integer flightId){
 
         //Calculate the total revenue that a flight could have
         //That is of all the passengers that have booked a flight till now and then calculate the revenue
         //Revenue will also decrease if some passenger cancels the flight
-
-//        int noOfPeopleWhoHaveAlreadyBooked = flightToPassengerDb.get(flightId).size();
-//        return 3000 + noOfPeopleWhoHaveAlreadyBooked*50;
 
         int noOfPeopleWhoHaveAlreadyBooked = flightToPassengerDb.get(flightId).size();
         int variable_Fare = (noOfPeopleWhoHaveAlreadyBooked*(noOfPeopleWhoHaveAlreadyBooked-1)) * 25;
@@ -247,8 +223,6 @@ public class AirportRepository {
 
         return totalFare;
     }
-
-
                                                                                                 // 12th API
     public String addPassenger(Passenger passenger){
 
